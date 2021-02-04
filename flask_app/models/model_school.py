@@ -1,6 +1,7 @@
 from flask_app.ext.database import db
 from flask_app.ext.schema import ma
-import uuid
+from .model_student import get_student_schema
+from marshmallow import fields
 
 class School(db.Model):
     """ 
@@ -18,7 +19,10 @@ class School(db.Model):
     students = db.relationship('Student', backref="school")
 
 class SchoolSchema(ma.Schema):
-
+    
     class Meta:
         model = School
+        include_relationship = True
         fields = ('id', 'name', 'address', 'email', 'phone', 'students')
+
+    students = fields.List(fields.Nested(get_student_schema()))

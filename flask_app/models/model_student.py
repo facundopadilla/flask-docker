@@ -1,8 +1,9 @@
 from flask_app.ext.database import db
 from flask_app.ext.schema import ma
-from .model_school import School
 from datetime import datetime
-import uuid
+
+def get_student_schema():
+    return StudentSchema
 
 class Student(db.Model):
     """
@@ -20,15 +21,9 @@ class Student(db.Model):
     age = db.Column(db.Integer, nullable=False)
     school_id = db.Column(db.Integer, db.ForeignKey('school.id'), nullable=False)
 
-class StudentSchema(ma.SQLAlchemySchema):
+class StudentSchema(ma.Schema):
 
     class Meta:
         model = Student
         include_fk = True
-    
-    id = ma.auto_field()
-    first_name = ma.auto_field()
-    last_name = ma.auto_field()
-    email = ma.auto_field()
-    age = ma.auto_field()
-    school_id = ma.auto_field()
+        fields = ('id', 'date_created', 'first_name', 'last_name', 'email', 'age', 'school_id')
