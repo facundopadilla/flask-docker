@@ -46,19 +46,23 @@
 		
 		1) Run: pip3 install virtualenv && python3 -m virtualenv env_flask
 		2) Enter directory *../env_flask/bin/activate* and execute: **source activate** (in the terminal)
-		3) Return to the path where **run_debug.py** is found 
+		3) Return to the path where **run_debug.py** is found, and run: pip install -r requirements.txt
 		4) Run the following commands:
 			- *export FLASK_APP=run_debug.py*
 			- *flask run -h 0.0.0.0 -p 5001*(the host and port can be changed to the one you want)
+			or
+			- *python run_debug.py*
 
 	- **Windows:**
 		
 		1) Run: pip3 install virtualenv && python3 -m virtualenv env_flask
 		2) Enter directory ../env_flask/bin/activate and execute: **activate** in CMD
-		3) Return to the path where **run_debug.py** is found 
+		3) Return to the path where **run_debug.py** is found, and run: pip install -r requirements.txt
 		4) Run the following commands:
 			- *set FLASK_APP=run_debug.py*
 			- *flask run -h 0.0.0.0 -p 5001* (the host and port can be changed to the one you want)
+			or
+			- *python run_debug.py*
 			
 **ATTENTION:** in the Dynaconf configuration file (*settings.toml*), when running the *run_debug.py* , the MySQL connection points to *localhost* and port *3307*, if it is going to be uploaded to production, remove the "expose" option from the docker-file.yaml file.
 
