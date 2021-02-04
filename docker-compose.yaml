@@ -1,0 +1,55 @@
+version: '3.1'
+services:
+    flask_app:
+        container_name: flask_app
+        restart: always
+        build:
+                context: .
+                dockerfile: Dockerfile-Flask
+        depends_on:
+                - db
+        environment:
+                - PYTHONBUFFERED=1
+                - ENVVAR_PREFIX_FOR_DYNACONF=flask_app
+                - ENVVAR_FOR_DYNACONF=settings.toml
+                - FLASK_APP=run.py
+                - FLASK_RUN_HOST=0.0.0.0
+                - FLASK_DEBUG=0
+        networks:
+                flask_network:
+                        aliases:
+                                - flask-network
+        command: bash -c 'flask create_db && gunicorn --bind 0.0.0.0:8000 --workers 4 "run:create_run()"'
+    nginx:
+        image: nginx
+        container_name: flask_nginx
+        restart: always
+        volumes:
+                - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        ports:
+                - 80:80
+        depends_on:
+                - flask_app
+        networks:
+                - flask_network
+    db:
+        image: mysql:5.7
+        restart: always
+        container_name: flask_db
+        ports:
+                - "3307:3306"
+        expose:
+                - "3307"
+        environment:
+                - MYSQL_USER=user
+                - MYSQL_PASSWORD=user123
+                - MYSQL_DATABASE=flask_api
+                - MYSQL_ROOT_PASSWORD=12345678
+        volumes:
+                - flask_volume:/var/lib/mysql
+        networks:
+                - flask_network
+volumes:
+        flask_volume:
+networks:
+        flask_network:

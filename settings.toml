@@ -1,0 +1,14 @@
+[default]
+SQLALCHEMY_TRACK_MODIFICATIONS = "False"
+SWAGGER_BASEPATH = "/api/v1/"
+
+[development]
+# When you switch to debug mode, the db name becomes localhost and port 3307.
+DEBUG = "True"
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:12345678@localhost:3307/flask_api"
+
+[production]
+# When in production, mostly in the docker, it keeps running this configuration
+DEBUG = "False"
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:12345678@flask_db/flask_api"
+
