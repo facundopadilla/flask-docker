@@ -43,18 +43,20 @@
 - **How to activate env_flask**:
 
 	- **Linux / PowerShell**:
-
-		1) Enter directory *../env_flask/bin/activate* and execute: **source activate** (in the terminal)
-		2) Return to the path where **run_debug.py** is found 
-		3) Run the following commands:
+		
+		1) Run: pip3 install virtualenv && python3 -m virtualenv env_flask
+		2) Enter directory *../env_flask/bin/activate* and execute: **source activate** (in the terminal)
+		3) Return to the path where **run_debug.py** is found 
+		4) Run the following commands:
 			- *export FLASK_APP=run_debug.py*
 			- *flask run -h 0.0.0.0 -p 5001*(the host and port can be changed to the one you want)
 
 	- **Windows:**
-
-		1) Enter directory ../env_flask/bin/activate and execute: **activate** in CMD
-		2) Return to the path where **run_debug.py** is found 
-		3) Run the following commands:
+		
+		1) Run: pip3 install virtualenv && python3 -m virtualenv env_flask
+		2) Enter directory ../env_flask/bin/activate and execute: **activate** in CMD
+		3) Return to the path where **run_debug.py** is found 
+		4) Run the following commands:
 			- *set FLASK_APP=run_debug.py*
 			- *flask run -h 0.0.0.0 -p 5001* (the host and port can be changed to the one you want)
 			
